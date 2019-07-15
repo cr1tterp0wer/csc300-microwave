@@ -12,3 +12,6 @@ Present the class diagram for your design. Include all multiplicities. (5pts)
 
 Provide a component diagram, and a deployment diagram of the software which is used to control the appliance. (5pts)
 
+
+
+Seth's Change 
