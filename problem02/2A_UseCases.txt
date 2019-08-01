@@ -1,4 +1,4 @@
-Identify, and list (with detailed description) all the actors and use cases for the appliance, including UML diagrams. (5pts)
+﻿Identify, and list (with detailed description) all the actors and use cases for the appliance, including UML diagrams. (5pts)
 
 Actors: 
 User – The user operates the toaster oven, places food in and takes food out of the toaster oven, opens and closes the door, and sets the dial settings which determine how the toaster oven will function. 
@@ -7,11 +7,11 @@ Appliance – the appliance (the toaster oven), reads user input from the dials 
 Use Cases:
 
 UC1 - 
-	TITLE: Cook Food (Preset)
+	TITLE: Cook Food (Toast Preset)
 	PRIMARY ACTOR: User
-	SUCESS SCENARIO: User inserts food into the Toaster. User Sets the Temperature Preset(Toast, Broil, Warm, Bake) for the Toaster. User presses “Start”. Toaster Timer begins preset countdown. Toaster displays current timer during countdown and stops when it reaches 0. The Toaster Bell dings to notify the User. User removes food for consumption.
+	SUCESS SCENARIO: User inserts food into the Toaster. User Sets the Function "Toast" for the Toaster. User sets Toast selector to desired toast setting (light , mild, dark). User presses “Start”. Toaster sets timer based on preset setting (1min, 2min, 3min, repectively). Toaster Timer begins preset countdown; activates indicator light. Toaster displays current timer during countdown and stops when it reaches 0; turns off indicator light. The Toaster Bell dings to notify the User. User removes food for consumption.
 
 UC2 - 
 	TITLE: Cook Food (Manual)
 	PRIMARY ACTOR: User
-	SUCESS SCENARIO: User inserts food into the Toaster. User Sets the Temperature Dial for the Toaster. User sets the Timer for the Toaster. User presses “Start”. Toaster Timer begins countdown. Toaster displays current timer during countdown and stops when it reaches 0. The Toaster Bell dings to notify the User. User removes food for consumption.
+	SUCESS SCENARIO: User inserts food into the Toaster. User sets function to either bake, broil or warm on the Function selector. User Sets the Temperature Dial for the Toaster. User sets the Timer for the Toaster. User presses “Start”. Toaster Timer begins countdown; indicator light turns on. Toaster displays current timer during countdown and stops when it reaches 0; indicator light turns off. The Toaster Bell dings to notify the User. User removes food for consumption.
