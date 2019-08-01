@@ -8,4 +8,5 @@ The System must include a tray
 The System must operate on a food
 The System must cook food for a specific time period
 The System must deliver food for consumption
-
+The System must have an indicator light
+The System must have States for Toast-Function( "light [sets time 1min]", "mild [sets time 2min]", "dark [sets time 3min]" )
