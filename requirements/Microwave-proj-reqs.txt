@@ -3,10 +3,9 @@ Microwave Project Requirements
 The System must have a Function selector ( Toast, Broil, Warm, Bake )
 The System must have a Temperature selector ( 0 - 450F )
 The System must have a Time selector
-The System must have a Toast selector
 The System must "ding" when the Timer is done
-The System must have an on/off light
 The System must include a tray
-The System must turn off if the door is opened during operation
 The System must operate on a food
+The System must cook food for a specific time period
+The System must deliver food for consumption
 
