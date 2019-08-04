@@ -1,10 +1,17 @@
 #include "Timer.h"
-
+Timer::Timer(){
+  currentTime = std::time(0);
+  prevTime = currentTime;
+  this->secs = 20;
+}
 Timer::Timer( int s ){
   currentTime  = std::time(0); 
   prevTime = currentTime;
-
-  this->secs = s;
+  
+  if( s > MAX_TIME ){
+    this->secs = s;
+  }else
+    this->secs = MAX_TIME;
 }
 Timer::~Timer(){}
 
@@ -33,14 +40,6 @@ bool Timer::decrementSeconds(){
   }
 
   return false;
-}
-
-int Timer::getCurrentTime(){
-  return currentTime;
-}
-
-int Timer::getPrevTime(){
-  return prevTime;
 }
 
 

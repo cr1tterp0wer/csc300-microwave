@@ -14,6 +14,7 @@ class Timer{
     time_t secs;
 
   public:
+    Timer();
     Timer( int s );
     virtual ~Timer();
 
@@ -21,8 +22,5 @@ class Timer{
     int    getSeconds();
     void   setSeconds( int& s );
     bool   decrementSeconds();
-
-    int getCurrentTime();
-    int getPrevTime();
 };
 

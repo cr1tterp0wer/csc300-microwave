@@ -11,6 +11,7 @@ Food::Food( string n, int e ){
   this->energyDelta = e;
   this->name = n;
 }
+Food::~Food(){}
 
 void Food::setName( string& n ){
   this->name = n;
