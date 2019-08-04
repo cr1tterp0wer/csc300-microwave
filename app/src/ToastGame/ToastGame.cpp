@@ -1,6 +1,7 @@
 #include "ToastGame.h"
 
 ToastGame::ToastGame(){
+
   m_state   = MAIN;
   t_setting = LIGHT;
   c_setting = TOAST; 
@@ -14,6 +15,7 @@ ToastGame::~ToastGame(){}
 void ToastGame::playGame(){
   
   isPlaying = true;
+
   startPrompt();
   displayDashboard();
   displayMenu();
@@ -91,9 +93,9 @@ void ToastGame::getInput(){
 void ToastGame::displayDashboard(){
   
   cout << "**************************************" << endl << endl;
-  cout << "Timer: " << timer->getSeconds() << endl;
-  cout << "Toast Function: " << t_setting << endl;
-  cout << "Cook Setting: " << c_setting << endl << endl;
+  cout << "Timer: " << timer->getSeconds() << " second(s) remaining." << endl;
+  cout << "Toast Function: " << t_setting_str[ t_setting ] << endl;
+  cout << "Cook Setting: " << c_setting_str[ c_setting ] << endl << endl;
 }
 
 void ToastGame::displayMenu(){
