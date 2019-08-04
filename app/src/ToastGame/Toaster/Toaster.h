@@ -18,7 +18,7 @@ class Toaster{
     Toaster();
     virtual ~Toaster();
 
-    void setTemp( double& t );
+    void setTemp( double t );
     void setIsDoorOpen( bool b );
     void setIsTrayFull( bool b );
     void setIsCooking( bool b  );

@@ -8,7 +8,7 @@ Toaster::Toaster(){
 }
 Toaster::~Toaster(){}
 
-void Toaster::setTemp( double& t ){
+void Toaster::setTemp( double t ){
   this->temperature = t;
 }
 void Toaster::setIsDoorOpen( bool b ){
