@@ -33,6 +33,7 @@ void ToastGame::start(){
 
 void ToastGame::update(){
 
+  timer->decrementSeconds();
   if( timer->getSeconds() < 1 ){
     isPlaying = false;
   }
@@ -41,10 +42,43 @@ void ToastGame::update(){
 }
 
 void ToastGame::render(){
+  displayDashboard(); 
+  displayMenu();
+}
 
-  if( timer->decrementSeconds() ){
-    cout << timer->getSeconds() << endl;
-  }
+void ToastGame::getInput(){
+
+  userInput = 0;
+  cin >> userInput; 
+  
+   //Process State
+   //Process input
+   switch( userInput ){
+     case 1:
+       if( m_state == 0x01 ){
+         m_state = OPEN_DOOR;
+       }else if( m_state == 0x02 ){
+         m_state = OPEN_DOOR;
+       }else if( m_state == 0x03 ){
+         insertFood();
+       }else if( m_state == 0x04 ){
+         m_state = SET_FUNCTION;
+       }
+       break;
+     case 2:
+       break;
+     case 3:
+       break;
+     case 4:
+       break;
+     case 5:
+       break;
+     case 6:
+       break;
+     default:
+       break;
+   }
+   
 }
 
 void ToastGame::cancel(){
@@ -84,12 +118,9 @@ void ToastGame::startPrompt(){
   cout << "**************************************" << endl;
   cout << "***          Toaster Game          ***" << endl;
   cout << "**************************************" << endl;
-  
 }
 
-void ToastGame::getInput(){
 
-}
 void ToastGame::displayDashboard(){
   
   cout << "**************************************" << endl << endl;
@@ -104,10 +135,18 @@ void ToastGame::displayMenu(){
 
   switch( m_state ){
     case MAIN:
-      cout <<  "1. Open Door" << endl;
+      cout << "1. Open Door" << endl;
       cout << "2. Insert Food" << endl;
       cout << "3. Cook Settings" << endl;
       cout << "4. Close Door" << endl;
+      cout << "5. Start" << endl;
+      cout << "6. Exit" << endl;
+      break;
+    case OPEN_DOOR:
+      cout << "1. Peek Inside" << endl;
+      cout << "2. Close Door" << endl;
+      cout << "3. Insert Food" << endl;
+      cout << "4. Cook Settings" << endl;
       cout << "5. Start" << endl;
       cout << "6. Exit" << endl;
       break;
@@ -115,6 +154,16 @@ void ToastGame::displayMenu(){
       break;
   }
   cout << endl << "Select an option: " << endl;
+
+/*
+cout << "1." << endl;
+cout << "2." << endl;
+cout << "3. " << endl;
+cout << "4." << endl;
+cout << "5." << endl;
+cout << "6." << endl;
+*/
+
 }
 
 

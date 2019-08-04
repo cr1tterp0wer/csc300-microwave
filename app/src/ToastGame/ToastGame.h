@@ -6,6 +6,7 @@
 
 using std::string;
 using std::endl;
+using std::cin;
 
 class ToastGame{
 
@@ -27,14 +28,14 @@ class ToastGame{
       BAKE  = 0x03 
     } c_setting = TOAST;
     enum MENU_STATE{ 
-      KILL,
-      MAIN,
-      OPEN_DOOR, 
-      INSERT_FOOD,
-      COOK_SETTING,
-      SET_FUNCTION, 
-      SET_TEMPERATURE,
-      SET_TIME
+      KILL = 0x00,
+      MAIN = 0x01,
+      OPEN_DOOR = 0x02, 
+      INSERT_FOOD = 0x03,
+      COOK_SETTING = 0x04,
+      SET_FUNCTION = 0x05, 
+      SET_TEMPERATURE = 0x06,
+      SET_TIME = 0x07
     } m_state = MAIN;
     string t_setting_str[3] = { "Light", "Mild", "Dark" };
     string c_setting_str[4] = { "Toast", "Broil", "Warm", "Bake" };
