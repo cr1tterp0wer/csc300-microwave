@@ -1,4 +1,7 @@
 #include "Timer.h"
+#include <iostream>
+using namespace std;
+
 Timer::Timer(){
   currentTime = std::time(0);
   prevTime = currentTime;
@@ -23,19 +26,20 @@ int Timer::getSeconds(){
   return this->secs;
 }
 
-void Timer::setSeconds( int& s ){
+void Timer::setSeconds( int s ){
 
   if( s < MAX_TIME )
     this->secs = s; 
 }
 
 bool Timer::decrementSeconds(){
+  cout << currentTime << endl;
 
   currentTime = std::time(0);
+  cout << prevTime << endl << endl;
 
   if( currentTime - prevTime >= 1 ){
     this->secs--;
-    prevTime = currentTime;
     return true;
   }
 

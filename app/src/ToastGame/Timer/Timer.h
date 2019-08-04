@@ -20,7 +20,7 @@ class Timer{
 
     void   clearSeconds();
     int    getSeconds();
-    void   setSeconds( int& s );
+    void   setSeconds( int s );
     bool   decrementSeconds();
 };
 
