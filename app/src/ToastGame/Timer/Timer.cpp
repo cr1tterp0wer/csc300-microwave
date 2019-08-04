@@ -33,10 +33,8 @@ void Timer::setSeconds( int s ){
 }
 
 bool Timer::decrementSeconds(){
-  cout << currentTime << endl;
 
   currentTime = std::time(0);
-  cout << prevTime << endl << endl;
 
   if( currentTime - prevTime >= 1 ){
     this->secs--;

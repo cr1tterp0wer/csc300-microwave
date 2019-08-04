@@ -9,7 +9,6 @@ int main(){
 
   ToastGame tg;
   tg.playGame();
-  
 
   return 0;
 }

@@ -227,9 +227,9 @@ void ToastGame::render(){
     displayDashboard(); 
     displayMenu();
   }else{
-    while( timer->getSeconds() > 1 ){
+    while( timer->getSeconds() >= 1 ){
       if( timer->decrementSeconds() )
-        cout << timer->getSeconds();
+        cout << timer->getSeconds() << endl;
     }
   }
   
