@@ -55,64 +55,90 @@ void ToastGame::getInput(){
    //Process input
    switch( userInput ){
      case 1:
-       if( m_state == 0x01 ){
+       if( m_state == MAIN ){
          m_state = OPEN_DOOR;
-       }else if( m_state == 0x02 ){
+       }else if( m_state == OPEN_DOOR ){
          m_state = OPEN_DOOR;
-       }else if( m_state == 0x03 ){
+       }else if( m_state == INSERT_FOOD ){
          insertFood();
-       }else if( m_state == 0x04 ){
+       }else if( m_state == COOK_SETTING ){
          m_state = SET_FUNCTION;
+       }else if( m_state == SET_FUNCTION ){
+
+       }else if( m_state == SET_TEMPERATURE ){
+
+       }else if( m_state == SET_TIME ){
+
        }
        break;
      case 2:
+       if( m_state == MAIN ){
+         m_state = INSERT_FOOD;
+       }else if( m_state == OPEN_DOOR ){
+         closeDoor();
+         m_state = COOK_SETTING; 
+       }else if( m_state == INSERT_FOOD ){
+         m_state = COOK_SETTING; 
+       }else if( m_state == COOK_SETTING ){
+         m_state = SET_TEMPERATURE;
+       }
        break;
      case 3:
+       if( m_state == MAIN ){
+         m_state = COOK_SETTING;
+       }else if( m_state == OPEN_DOOR ){
+         m_state = INSERT_FOOD;
+       }else if( m_state == INSERT_FOOD ){
+         m_state = START;
+       }else if( m_state == COOK_SETTING ){
+         m_state = SET_TIME;
+       }
        break;
      case 4:
+       if( m_state == MAIN ){
+         closeDoor();
+         m_state = MAIN;
+       }else if( m_state == OPEN_DOOR ){
+         m_state = COOK_SETTING;
+       }else if( m_state == INSERT_FOOD ){
+         closeDoor();
+         m_state = MAIN;
+       }else if( m_state == COOK_SETTING ){
+         m_state = MAIN;
+       }
        break;
      case 5:
+       if( m_state == MAIN ){
+         m_state = START;
+       }else if( m_state == OPEN_DOOR ){
+         m_state = START;
+       }else if( m_state == INSERT_FOOD ){
+         m_state = KILL;
+       }else if( m_state == COOK_SETTING ){
+         m_state = KILL;
+       }
        break;
      case 6:
+       if( m_state == MAIN ){
+         m_state = KILL;
+       }else if( m_state == OPEN_DOOR ){
+         m_state = KILL;
+       }
        break;
      default:
+       cout << "Try again" << endl;
        break;
    }
-   
+  /*
+     if( m_state == MAIN ){
+     }else if( m_state == OPEN_DOOR ){
+     }else if( m_state == INSERT_FOOD ){
+     }else if( m_state == COOK_SETTING ){
+     }
+
+
+ */
 }
-
-void ToastGame::cancel(){
-
-}
-
-void ToastGame::insertFood(){
-
-}
-
-void ToastGame::removeFood(){
-
-}
-
-void ToastGame::openDoor(){
-
-}
-
-void ToastGame::closeDoor(){
-
-}
-
-void ToastGame::setTime(){
-
-}
-
-void ToastGame::setToasterFunction(){
-
-}
-
-void ToastGame::setTemperature(){
-
-}
-
 void ToastGame::startPrompt(){
 
   cout << "**************************************" << endl;
@@ -150,6 +176,20 @@ void ToastGame::displayMenu(){
       cout << "5. Start" << endl;
       cout << "6. Exit" << endl;
       break;
+    case INSERT_FOOD:
+      cout << "1. Insert Bread" << endl;
+      cout << "2. Cook Settings" << endl;
+      cout << "3. Start" << endl;
+      cout << "4. Close Door" << endl;
+      cout << "5. Cancel" << endl;
+      break;
+    case COOK_SETTING:
+      cout << "1. Set Function" << endl;
+      cout << "2. Set Temperature" << endl;
+      cout << "3. Set Time" << endl;
+      cout << "4. Main Menu" << endl;
+      cout << "5. Exit" << endl;
+      break;
     default:
       break;
   }
@@ -163,8 +203,41 @@ cout << "4." << endl;
 cout << "5." << endl;
 cout << "6." << endl;
 */
+}
+
+void ToastGame::cancel(){
 
 }
+
+void ToastGame::insertFood(){
+
+}
+
+void ToastGame::removeFood(){
+
+}
+
+void ToastGame::openDoor(){
+
+}
+
+void ToastGame::closeDoor(){
+
+}
+
+void ToastGame::setTime(){
+
+}
+
+void ToastGame::setToasterFunction(){
+
+}
+
+void ToastGame::setTemperature(){
+
+}
+
+
 
 
 

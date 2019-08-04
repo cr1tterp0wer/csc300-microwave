@@ -35,7 +35,8 @@ class ToastGame{
       COOK_SETTING = 0x04,
       SET_FUNCTION = 0x05, 
       SET_TEMPERATURE = 0x06,
-      SET_TIME = 0x07
+      SET_TIME = 0x07,
+      START    = 0x08
     } m_state = MAIN;
     string t_setting_str[3] = { "Light", "Mild", "Dark" };
     string c_setting_str[4] = { "Toast", "Broil", "Warm", "Bake" };
