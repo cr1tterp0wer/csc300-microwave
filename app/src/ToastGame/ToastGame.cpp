@@ -4,11 +4,13 @@ ToastGame::ToastGame(){
 
   m_state   = MAIN;
   t_setting = LIGHT;
-  c_setting = TOAST; 
+  c_setting = BAKE; 
 
   isPlaying = false;
   bread = new Food( "*Wonder Bread", 100 );
   timer = new Timer( 5 );
+  toaster.setTemp( 75 );
+  closeDoor();
 }
 ToastGame::~ToastGame(){}
 
@@ -36,34 +38,38 @@ void ToastGame::update(){
   if( ma_settings != START_A){
     getInput();
     processInput();
-    
-    if( c_setting == TOAST ){
-      toaster.setTemp( 175.0 );
-      
-      switch( t_setting ){
-        case LIGHT: 
-//          timer->setSeconds( 60 );
-          break;
-        case MILD:
- //         timer->setSeconds( 120 );
-          break;
-        case DARK:
-//          timer->setSeconds( 180 );
-          break;
-        default:
-          break;
-      }
-    }
-    if( timer->getSeconds() < 1 ){
-      isPlaying = false;
-    }
+  }
+  if( timer->getSeconds() < 1 ){
+    isPlaying = false;
   }
 }
 
 void ToastGame::processInput(){
+  if( m_state == KILL ){
+    ma_settings= NONE;
+    isPlaying = false;
+  }
 
   if( ma_settings == START_A ){
-   cout << "FIRING UP!" << endl; 
+    if( toaster.getIsDoorOpen() ){
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+      cout << "         CANNOT START DOOR IS OPEN!" << endl;
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+      m_state = MAIN;
+      ma_settings = NONE;
+    } else if( !toaster.getIsTrayFull() ){
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+      cout << "         CANNOT START NO FOOD INSIDE!" << endl;
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+      m_state = MAIN;
+      ma_settings = NONE;
+    }
+    else{
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+      cout << "               STARTING TOASTER!" << endl;
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+      m_state = MAIN;
+    }
   }else if( ma_settings == PEEK_INSIDE_A ){
     if( toaster.getIsTrayFull() ){
       cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
@@ -102,14 +108,81 @@ void ToastGame::processInput(){
 
     ma_settings = NONE;
   }else if( ma_settings == CLOSE_DOOR_A ){
-    closeDoor();
+    if( !toaster.getIsDoorOpen() ){
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+      cout << "          DOOR ALREADY CLOSED "<< endl;
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+    }else{
+      closeDoor();
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+      cout << "                DOOR CLOSED "<< endl;
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+      ma_settings = NONE;
+    }
+  }else if( m_state == SET_TEMPERATURE ){
+   cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+   cout << "     ENTER A TEMPERATURE (0-500)"<< endl;
+   cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+
+   double input;
+   cin >> input;
+
+   if( input > 500 ){
+     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+     cout << "    TEMPERATURE TOO HIGH!"<< endl;
+     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+   }else if( input < 50 ){
+     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+     cout << "    TEMPERATURE TOO LOW!"<< endl;
+     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+   }
+
+   toaster.setTemp( input ); 
+   m_state = COOK_SETTING;
+  }else if( m_state == SET_TIME ){
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
-    cout << "                DOOR CLOSED "<< endl;
+    cout << "            ENTER TIME AMOUNT (seconds)"<< endl;
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
-    ma_settings = NONE;
+
+    int input;
+    cin >> input;
+
+    if( input > 3600 ){
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+      cout << "            TIME AMOUNT TOO HIGH!"<< endl;
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+    }else if( input < 1 ){
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+      cout << "            TIME AMOUNT TOO LOW!"<< endl;
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<< endl;
+    }
+
+    setTime( input ); 
+    m_state = COOK_SETTING;
   }
 
+  if( c_setting == TOAST ){
+      toaster.setTemp( 175.0 );
+      switch( t_setting ){
+        case LIGHT: 
+          timer->setSeconds( 60 );
+          break;
+        case MILD:
+          timer->setSeconds( 120 );
+          break;
+        case DARK:
+          timer->setSeconds( 180 );
+          break;
+        default:
+          break;
+      }
+  }else if ( c_setting == BROIL ){
+    toaster.setTemp(300);
+  }else if ( c_setting == WARM ){
+    toaster.setTemp(100);
+  }
 }
+
 void ToastGame::getInput(){
 
   userInput = 0;
@@ -223,16 +296,22 @@ void ToastGame::getInput(){
 }
 
 void ToastGame::render(){
+
   if( ma_settings != START_A ){
     displayDashboard(); 
     displayMenu();
   }else{
+
     while( timer->getSeconds() >= 1 ){
+
       if( timer->decrementSeconds() )
         cout << timer->getSeconds() << endl;
+
     }
+
+    cout << "DING!" << endl;
+    isPlaying = false;
   }
-  
 }
 
 void ToastGame::insertFood(){
@@ -263,13 +342,13 @@ void ToastGame::startPrompt(){
   cout << "**************************************" << endl;
 }
 
-
 void ToastGame::displayDashboard(){
   
   cout << "**************************************" << endl << endl;
   cout << "Timer: " << timer->getSeconds() << " secs" << endl;
   cout << "Toast Function: " << t_setting_str[ t_setting ] << endl;
-  cout << "Cook Setting: "   << c_setting_str[ c_setting ] << endl << endl;
+  cout << "Cook Setting: "   << c_setting_str[ c_setting ] << endl;
+  cout << "Temperature: " << toaster.getTemp() << endl << endl;
 }
 
 void ToastGame::displayMenu(){
@@ -319,7 +398,6 @@ void ToastGame::displayMenu(){
       cout << "5. Main Menu" << endl;
       break;
     case TOAST_MENU:
-
       cout << "*********** TOAST MENU ***********" << endl;
       cout << "1. Light" << endl;
       cout << "2. Mild" << endl;
