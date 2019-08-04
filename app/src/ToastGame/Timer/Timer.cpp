@@ -38,6 +38,7 @@ bool Timer::decrementSeconds(){
 
   if( currentTime - prevTime >= 1 ){
     this->secs--;
+    prevTime = currentTime;
     return true;
   }
 
