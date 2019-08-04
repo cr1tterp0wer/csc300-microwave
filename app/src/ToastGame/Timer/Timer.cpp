@@ -9,9 +9,9 @@ Timer::Timer( int s ){
   prevTime = currentTime;
   
   if( s > MAX_TIME ){
-    this->secs = s;
-  }else
     this->secs = MAX_TIME;
+  }else
+    this->secs = s;
 }
 Timer::~Timer(){}
 

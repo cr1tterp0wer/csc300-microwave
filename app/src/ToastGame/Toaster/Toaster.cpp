@@ -6,9 +6,7 @@ Toaster::Toaster(){
   isCooking  = false;
   food = nullptr;
 }
-Toaster::~Toaster(){
-  delete food;
-}
+Toaster::~Toaster(){}
 
 void Toaster::setTemp( double& t ){
   this->temperature = t;

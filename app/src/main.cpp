@@ -1,18 +1,15 @@
 #include<iostream>
+#include "./ToastGame/ToastGame.h"
 
 using std::cout;
 using std::endl;
 
 int main(){
+ 
+
+  ToastGame tg;
+  tg.playGame();
   
-/*
-  while( t.getSeconds() > 1 ){
-    if( t.decrementSeconds() ){
-      printf("\033c");
-      cout << t.getSeconds() << endl;
-    }
-  }
-*/ 
 
   return 0;
 }

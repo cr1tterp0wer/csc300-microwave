@@ -13,9 +13,9 @@ class ToastGame{
     short userInput;
     bool  isPlaying;
     Toaster toaster;
-    Food    bread;
-    Timer   timer;
-    enum toastSetting{ LIGHT, MILD, DARK } t_setting = LIGHT;
+    Food    *bread;
+    Timer   *timer;
+    enum toastSetting{ LIGHT, MILD, DARK } t_setting       = LIGHT;
     enum cookSetting{ TOAST, BROIL, WARM, BAKE } c_setting = TOAST;
     enum menuState{ 
       KILL,
@@ -41,6 +41,8 @@ class ToastGame{
     void setTemperature();
     void startPrompt();
     void getInput();
+    void displayDashboard();
+    void displayMenu();
 
   public:
     ToastGame();
